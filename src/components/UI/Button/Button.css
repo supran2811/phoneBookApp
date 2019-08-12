@@ -1,14 +1,40 @@
 .Button {
-    background-color: #777;
-    color:white;
     cursor: pointer;
 }
 .Button--default {
+    background-color: transparent;
     padding : 10px;
+    font-style: bold;
+    font-size:0.9rem;
+    color:white;
+    border:none;
+    outline:none;
  }
 
- .Button:disabled {
-     background-color: #eee;
-     cursor: not-allowed;
-     color: #777;
+ .Button--primary {
+    background-color: #1565c0;
+    padding : 10px;
+    font-style: bold;
+    font-size:0.9rem;
+    color:white;
+    border:none;
+    border-radius: 5px;
+    outline:none;
+ }
+ .Button--secondary {
+    background-color: transparent;
+    padding : 10px;
+    font-style: bold;
+    font-size:0.9rem;
+    color:#1565c0;
+    border:1px solid #1565c0;
+    border-radius: 5px;
+    outline:none;
+ }
+
+ 
+
+ .Button--primary:disabled {
+    cursor: not-allowed;
+    background-color: #bbdefb;
  }

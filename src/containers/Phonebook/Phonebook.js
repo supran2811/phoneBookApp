@@ -20,13 +20,11 @@ class Phonebook extends Component {
     }  
 
     updateContact = (contactData)  => {
-        console.log( "contactData" , contactData , this.state.contacts);
         const index = this.state.contacts.findIndex(contact => contact.id === contactData.id);
 
         if(index >= 0) {
             let updatedContacts = [...this.state.contacts];///Object.assign([...this.state.contacts] , {index:contactData});
             updatedContacts[index] = contactData;
-            console.log('After update contacts' , updatedContacts);
             this.setState({contacts:updatedContacts,editContact:false,updateContact:null});
         }
     }

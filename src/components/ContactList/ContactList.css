@@ -16,6 +16,6 @@
 }
 .ContactList__elemRow {}
 .ContactList__elemRow:hover {
-    background-color: #eee;
+    background-color: #bbdefb;
     cursor:pointer;
 }

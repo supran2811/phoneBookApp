@@ -8,32 +8,28 @@ import DropDown from '../UI/DropDown';
 
 export default (props) => {
 
-    const { id , data : { type , name, label ,validation , istouched , errorMsg} , handleChange } = props;
+    const { id , data : { type , name, label ,validation , errormsg, errortodisplay} , handleChange } = props;
     let elementToRender;
     const handleBlur = e => {
-        console.log('Inside handleBlur ',id , istouched , e.target.value , validation);
         const value = e.target.value;
         let error ;
         if(validation && validation.required) {
             const { validationFn , maxLength , minLength } = validation;
             if(validationFn) {
                 if(!validationFn.call(null , value)){
-                    error = 'Not a valid entry!'
+                    error = errortodisplay;
                 }
             }
             else if(minLength && value.length < minLength) {
-                error = 'Value is less than the minimum lenght'
+                error = errortodisplay;
             }
             else if(maxLength && value.length > maxLength) {
-                error = 'Value is greater than the maximum lenght'
+                error =errortodisplay;
             }
         }
-
         handleChange(id , value , error);
     }
     const handleTextChange = (e) => {
-        console.log('Inside handleTextChange for '+id+':::',e.target.value);
-      
         const value = e.target.value;
         handleChange(id , value );
         
@@ -47,13 +43,12 @@ export default (props) => {
         handleChange(id , option );
     }
 
-    console.log('Inside textField ',id , errorMsg);
     if(type === 'text' || type === 'email' || type ==='number'){
         elementToRender =  <TextField id = {name} 
             element = {props.data} 
             handleChange = {handleTextChange} 
             handleBlur = {handleBlur}
-            hasError  = {errorMsg !== ''}/>
+            hasError  = {errormsg !== ''}/>
     }
     else if(type === 'dropdown') {
         elementToRender = <DropDown element = {props.data} 
@@ -64,7 +59,7 @@ export default (props) => {
             element= {props.data}
             handleChange = {handleTextChange} 
             handleBlur = {handleBlur}
-            hasError  = {errorMsg !== ''}/>
+            hasError  = {errormsg !== ''}/>
     }
 
     return <tr>
@@ -74,7 +69,7 @@ export default (props) => {
                 <td width="80%">
                     {elementToRender}
                     <div className = "FormElement__error">
-                        {errorMsg}
+                        {errormsg}
                     </div>
                 </td>
            </tr>

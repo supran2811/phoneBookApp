@@ -7,11 +7,19 @@ export default (props) => {
 
     const {
         large,
+        primary,
+        secondary,
         cls
     } = props;
 
     if(large) {
         classes.push('Button--large');
+    }
+    else if(primary) {
+        classes.push('Button--primary');
+    }
+    else if(secondary) {
+        classes.push('Button--secondary');
     }
     else {
         classes.push('Button--default');

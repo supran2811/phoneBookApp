@@ -4,11 +4,11 @@ import Contact from '../Contact';
 import './ContactList.css';
 
 const contactList = ({contacts , onContactClick}) => {
-    const contactListData =  contacts && contacts.length > 0 ? <tbody> {contacts.map( contact => {
+    const contactListData =  contacts && contacts.length > 0 ? <tbody>{contacts.map( contact => {
         return <tr className = 'ContactList__elemRow' key = {contact.id} onClick = {() => onContactClick(contact)}>
             <Contact contact={contact} />
         </tr>
-    })} </tbody> : null;
+    })}</tbody> : null;
 
     return <div className="ContactList">
             <table>

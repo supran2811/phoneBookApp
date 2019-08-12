@@ -4,6 +4,7 @@ import utils from '../../utils';
 import './AddContactForm.css';
 import FormElement from '../FormElement/FormElement';
 import Button from '../UI/Button';
+import { ERROR_MSG } from '../../constants';
 
 export default ( { submitForm , cancelForm , contact , editing} ) => {
     const [ formData , setFormData  ] = useState({
@@ -13,7 +14,8 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
             label:'First Name*',
             placeholder: 'Enter first name',
             value: (contact && contact['firstName']) || '',
-            errorMsg:'',
+            errormsg:'',
+            errortodisplay: ERROR_MSG.InvalidName,
             validation: {
                 minLength: 3,
                 maxLength: 20,
@@ -27,7 +29,8 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
             label:'Last Name',
             placeholder: 'Enter last name',
             value: (contact && contact['lastName']) || '',
-            errorMsg:'',
+            errormsg:'',
+            errortodisplay: ERROR_MSG.InvalidName,
             validation: {
                 minLength: 3,
                 maxLength: 20
@@ -40,7 +43,8 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
             label: 'Phone Number*',
             placeholder:'Enter Phone Number',
             value: (contact &&  contact['phoneNumber']) || '',
-            errorMsg:'',
+            errormsg:'',
+            errortodisplay: ERROR_MSG.InvalidPhoneNumber,
             validation: {
                 validationFn:utils.validateTelephone,
                 required:true
@@ -51,9 +55,15 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
             type:'dropdown',
             name: 'contactType',
             label: 'Contact Type*',
-            value : (contact &&  contact['contactType']) || {value:'' , displayValue:''},
-            errorMsg:'',
+            value : (contact &&  contact['contactType']) || {value:'Select Contact Type' , displayValue:'Select Contact Type'},
+            errormsg:'',
             options :[
+                {
+                    value : 'Select Contact Type',
+                    displayValue : 'Select Contact Type',
+                    disabled:true
+                }
+                ,
                 {
                     value : 'home',
                     displayValue:'Home'
@@ -78,7 +88,8 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
             name: 'address',
             placeholder: 'Enter address',
             value: (contact && contact['address'])|| '',
-            errorMsg:'',
+            errormsg:'',
+            errortodisplay: ERROR_MSG.InvalidAddress,
             validation: {
                 minLength: 10,
                 maxLength: 200,
@@ -91,7 +102,8 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
             label: 'Email*',
             name: 'email',
             value: (contact && contact['email']) || '',
-            errorMsg:'',
+            errormsg:'',
+            errortodisplay: ERROR_MSG.InvalidEmail,
             placeholder:'Enter Email Address',
             validation: {
                 validationFn:utils.validateEmail,
@@ -103,30 +115,28 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
             type: 'text-area',
             label: 'Notes',
             name: 'notes',
+            errormsg:'',
             placeholder: 'Any additional notes',
             value: (contact && contact['notes']) || '',
-            errorMsg:'',
+            istouched: editing || false,
             validation: {
-                minLength: 10,
-                maxLength: 200
-            },
-            istouched: editing || false
+                required:false
+            }
         },
     });
 
     const [ isFormValid , setFormIsValid ] = useState(editing || false);
 
     const handleChange = (key , newValue , error) => {
-        console.log(key,newValue);
         let data = formData[key];
-        data = { ...data , value : newValue , errorMsg: (error || '') , istouched:true};
+        data = { ...data , value : newValue , errormsg: (error || '') , istouched:true};
         let updatedFormData = {...formData , [key] : data};
         let isValid = true;
         const formElems = Object.keys(updatedFormData);
         for(const formElemId of formElems){
             const formElem = updatedFormData[formElemId];
-            const { validation , errorMsg , istouched} = formElem;
-            if(validation && errorMsg !== '') {
+            const { validation , errormsg , istouched} = formElem;
+            if(validation && errormsg !== '') {
                 isValid = false;
                 break;
             }
@@ -151,7 +161,6 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
                 ...data , [formElem] : formData[formElem]['value']
             }
         }
-        console.log('Updateing ',data);
         submitForm(data);
     }
 
@@ -168,10 +177,10 @@ export default ( { submitForm , cancelForm , contact , editing} ) => {
             }
                 <tr>
                     <td>
-                        <Button cls="AddContactForm__btn" disabled = {!isFormValid} type='submit'>{ editing ? 'Update' : 'Add' }</Button>
+                        <Button primary cls="AddContactForm__btn" disabled = {!isFormValid} type='submit'>{ editing ? 'Update' : 'Add' }</Button>
                     </td>
                     <td>
-                        <Button cls="AddContactForm__btn" type='button' onClick={cancelForm}>Cancel</Button>
+                        <Button secondary cls="AddContactForm__btn" type='button' onClick={cancelForm}>Cancel</Button>
                     </td>
                 </tr>
                 </tbody>

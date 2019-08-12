@@ -12,7 +12,7 @@ export default ({element:{ placeholder , value , ...rest}, handleChange , handle
     return <textarea rows="4" cols="50"  maxLength="200"
         className={classToApply}
         onBlur={handleBlur}
-        onChange={handleChange} placeholder={placeholder} >
-        {value}
-    </textarea>
+        onChange={handleChange} placeholder={placeholder} 
+        value={value}/>
+        
 }

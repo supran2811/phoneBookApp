@@ -2,12 +2,11 @@ import React from 'react';
 import './DropDown.css';
 
 export default ({element , onChange }) => {
-    const { value , options } = element;
+    const { value  , options } = element;
     return <select className = 'DropDown' required value={value.value} onChange = {onChange}>
-            <option value="" disabled selected>Select Contact Type</option>
         {
-            options.map(({value , displayValue}) => {
-                return <option value={value}>
+            options.map(({value , displayValue , disabled }) => {
+                return <option key={value} value={value} disabled={disabled}>
                     {displayValue}
                 </option>
             })
