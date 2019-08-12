@@ -1,0 +1,21 @@
+.ContactList {
+    background-color: white;
+    width: 80%;
+}
+
+.ContactList table {
+    border: 1px solid #777;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.ContactList__header {
+    border-bottom: 1px solid #777;
+    padding:10px;
+    
+}
+.ContactList__elemRow {}
+.ContactList__elemRow:hover {
+    background-color: #eee;
+    cursor:pointer;
+}

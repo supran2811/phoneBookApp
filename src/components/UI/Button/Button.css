@@ -1,0 +1,14 @@
+.Button {
+    background-color: #777;
+    color:white;
+    cursor: pointer;
+}
+.Button--default {
+    padding : 10px;
+ }
+
+ .Button:disabled {
+     background-color: #eee;
+     cursor: not-allowed;
+     color: #777;
+ }

@@ -1,0 +1,18 @@
+.AddContactForm {
+    background-color: #eee;
+    padding: 10px 20px;
+}
+
+.AddContactForm__form {
+    width:90%;
+}
+
+.AddContactForm__action {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.AddContactForm__btn {
+    margin:10px;
+}

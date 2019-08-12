@@ -1,0 +1,9 @@
+.Phonebook {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Phonebook__actions {
+    width:100%;
+}
