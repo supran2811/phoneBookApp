@@ -5,3 +5,8 @@
     font-size: 0.8rem;
     margin-left: 10px;
 }
+
+.FormElement__label {
+    color:#1976d2;
+    font-style: bold;
+}

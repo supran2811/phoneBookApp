@@ -4,15 +4,15 @@
 }
 
 .ContactList table {
-    border: 1px solid #777;
+    border: 1px solid #0d47a1;
     border-collapse: collapse;
     width: 100%;
 }
 
 .ContactList__header {
-    border-bottom: 1px solid #777;
+    border-bottom: 1px solid #0d47a1;
     padding:10px;
-    
+    color: #1976d2;
 }
 .ContactList__elemRow {}
 .ContactList__elemRow:hover {

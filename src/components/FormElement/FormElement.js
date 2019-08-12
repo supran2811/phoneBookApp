@@ -64,7 +64,7 @@ export default (props) => {
 
     return <tr>
                 <td width="20%">
-                    <label htmlFor={name}>{label}</label>
+                    <label className = "FormElement__label" htmlFor={name}>{label}</label>
                 </td>
                 <td width="80%">
                     {elementToRender}
